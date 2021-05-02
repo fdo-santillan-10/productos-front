@@ -1,0 +1,32 @@
+<div class="main-container">
+    <app-head [title]="'Productos Favoritos'"></app-head>
+    <div class="container">
+        <table class="table row-border table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">Imagen</th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th class="text-center">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let fav of favoritos">
+                    <td class="text-center"><img [src]="fav.imagen" width="50" height="50"></td>
+                    <td class="align-middle" style="font-weight: bold;">{{ fav.producto }}</td>
+                    <td class="align-middle" style="font-weight: bold;">{{ fav.precio | currency }}</td>
+                    <td class="text-center align-middle"><button type="button" class="btn btn-info" (click)="eliminar(fav)"><i class="fa fa-trash"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col align-self-start"></div>
+            <div class="col align-self-center ml-5 pl-5">
+                <div class="pl-5">
+                    <button type="button" class="btn btn-success col-2m" [routerLink]="['/']">Ver Productos</button>
+                </div>
+            </div>
+            <div class="col align-self-end"></div>
+        </div>
+    </div>
+</div>

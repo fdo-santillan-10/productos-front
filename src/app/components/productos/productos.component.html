@@ -1,0 +1,50 @@
+<div class="main-container">
+    <app-head [title]="'Búsqueda de Productos'"></app-head>
+    <div class="container">
+        <form #formulario="ngForm">
+            <div class="row m-3">
+                <input type="text" class="form-control col pr-3" placeholder="Buscar producto" name="idproducto" [(ngModel)]="producto">
+                <div class="pl-5">
+                    <button type="button" class="btn btn-primary col-2m" (click)="buscarProducto()">Buscar</button>
+                </div>
+                <div class="pl-3">
+                    <button type="button" class="btn btn-success col-2m" [routerLink]="['/favoritos']">Ver Favoritos</button>
+                </div>
+            </div>
+            <div>
+                <table class="table row-border table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Imagen</th>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th class="text-center">Agregar a Favorito</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of elementos">
+                            <td class="text-center"><img [src]="item.thumbnail" width="50" height="50"></td>
+                            <td class="align-middle" style="font-weight: bold;">{{ item.title }}</td>
+                            <td class="align-middle" style="font-weight: bold;">{{ item.price | currency }}</td>
+                            <td class="text-center"><button type="button" class="btn btn-info" (click)="agregarProducto(item)"><i class="fa fa-star"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="container" *ngIf="productos.length > 10">
+                    <ul class="pagination">
+                        <li [class]="page > 0 ? 'page-item' : 'page-item disabled'">
+                            <a class="page-link" (click)="paginar(page - 1)" tabindex="-1" aria-disabled="true" role="button">Anterior</a>
+                        </li>
+                        <li [class]="page == i ? 'page-item active' : 'page-item'" *ngFor="let item of counter(productos.length / 10); let i = index">
+                            <a class="page-link" (click)="paginar(i)" role="button">{{ i + 1 }}</a>
+                        </li>
+                        <li [class]="page < (productos.length / 10) - 1 ? 'page-item' : 'page-item disabled'">
+                            <a class="page-link" (click)="paginar(page + 1)" tabindex="-1" aria-disabled="true" role="button">Siguiente</a>
+                        </li>
+                    </ul>
+                </div>
+                <br><br>
+            </div>
+        </form>
+    </div>
+</div>
